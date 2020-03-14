@@ -1,3 +1,4 @@
+use intcode::Intcode;
 use std::fs;
 
 fn main() {
@@ -11,28 +12,11 @@ fn main() {
                 .collect();
             vec[1] = i;
             vec[2] = j;
-            let mut counter = 0;
-            loop {
-                if vec[counter] == 1 {
-                    let i1 = vec[counter + 1];
-                    let i2 = vec[counter + 2];
-                    let i3 = vec[counter + 3];
-                    let num = vec[i1] + vec[i2];
-                    vec[i3] = num;
-                    counter += 4;
-                } else if vec[counter] == 2 {
-                    let i1 = vec[counter + 1];
-                    let i2 = vec[counter + 2];
-                    let i3 = vec[counter + 3];
-                    let num = vec[i1] * vec[i2];
-                    vec[i3] = num;
-                    counter += 4;
-                } else if vec[counter] == 99 {
-                    break;
-                } else {
-                    break;
-                }
-            }
+            let mut intcode = Intcode {
+                memory: &mut vec,
+                counter: 0,
+            };
+            while intcode.exec_cycle() {}
             if vec[0] == 19690720 {
                 let num = 100 * i + j;
                 println!("{}", num);
