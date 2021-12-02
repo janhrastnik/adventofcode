@@ -8,16 +8,15 @@ pub fn part_one() -> usize {
     let mut prev_number: Option<usize> = None;
 
     for line in lines {
-        if let Ok(number) = line {
-            println!("{:?}", number);
+        if let Ok(number) = line.unwrap().parse::<usize>() {
             if prev_number.is_none() {
-                prev_number = Some(number.parse::<usize>().unwrap());
+                prev_number = Some(number);
                 continue;
             }
-            if prev_number.unwrap() < number.parse::<usize>().unwrap() {
+            if prev_number.unwrap() < number {
                 count += 1;
             }
-            prev_number = Some(number.parse::<usize>().unwrap())
+            prev_number = Some(number)
         }
     }
     count
@@ -31,16 +30,16 @@ pub fn part_two() -> usize {
     let mut prev_window_number: Option<usize> = None;
 
     for line in lines {
-        if let Ok(number) = line {
+        if let Ok(number) = line.unwrap().parse::<usize>() {
             if window.len() < 3 {
-                window.push(number.parse::<usize>().unwrap());
+                window.push(number);
                 continue;
             }
             if prev_window_number.is_none() {
                 prev_window_number = Some(window.iter().sum());
             }
             window.remove(0);
-            window.push(number.parse::<usize>().unwrap());
+            window.push(number);
             if prev_window_number.unwrap() < window.iter().sum() {
                 count += 1;
             }
