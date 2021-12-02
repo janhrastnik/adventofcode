@@ -1,6 +1,7 @@
 use std::io;
 
 mod day1;
+mod day2;
 
 fn main() {
     println!("Hello, world!");
@@ -11,6 +12,8 @@ fn main() {
     match input.trim() {
         "1-1" => println!("{}", day1::part_one()),
         "1-2" => println!("{}", day1::part_two()),
+        "2-1" => println!("{}", day2::part_one()),
+        "2-2" => println!("{}", day2::part_two()),
         _ => println!("Wrong input!"),
     }
 }
