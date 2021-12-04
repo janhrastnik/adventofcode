@@ -3,6 +3,7 @@ use std::io;
 mod day1;
 mod day2;
 mod day3;
+mod day4;
 
 fn main() {
     println!("Hello, world!");
@@ -17,6 +18,8 @@ fn main() {
         "2-2" => println!("{}", day2::part_two()),
         "3-1" => println!("{}", day3::part_one()),
         "3-2" => println!("{}", day3::part_two()),
+        "4-1" => println!("{}", day4::part_one()),
+        "4-2" => println!("{}", day4::part_two()),
         _ => println!("Wrong input!"),
     }
 }
