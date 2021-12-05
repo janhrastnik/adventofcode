@@ -4,6 +4,7 @@ mod day1;
 mod day2;
 mod day3;
 mod day4;
+mod day5;
 
 fn main() {
     println!("Hello, world!");
@@ -20,6 +21,8 @@ fn main() {
         "3-2" => println!("{}", day3::part_two()),
         "4-1" => println!("{}", day4::part_one()),
         "4-2" => println!("{}", day4::part_two()),
+        "5-1" => println!("{}", day5::part_one()),
+        "5-2" => println!("{}", day5::part_two()),
         _ => println!("Wrong input!"),
     }
 }
