@@ -40,8 +40,8 @@ pub fn part_two() -> isize {
         .collect();
     let crab_average = average(&crabs);
     let epsilon = crabs.len() as isize;
-    let crab_min = crab_average - epsilon / 3;
-    let crab_max = crab_average + epsilon / 3;
+    let crab_min = crab_average - 2;
+    let crab_max = crab_average + 2;
     crabs.sort();
     let mut fuel_count_guesses: Vec<isize> = Vec::new();
 
