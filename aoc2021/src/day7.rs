@@ -39,7 +39,6 @@ pub fn part_two() -> isize {
         .map(|x| x.parse::<isize>().unwrap())
         .collect();
     let crab_average = average(&crabs);
-    let epsilon = crabs.len() as isize;
     let crab_min = crab_average - 2;
     let crab_max = crab_average + 2;
     crabs.sort();

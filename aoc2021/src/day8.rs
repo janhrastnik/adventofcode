@@ -9,7 +9,7 @@ fn concat(vec: Vec<usize>) -> usize {
 
 pub fn part_one() -> usize {
     let file = File::open("input/day8-1.txt").expect("some error when reading file");
-    let mut lines: Vec<String> = io::BufReader::new(file)
+    let lines: Vec<String> = io::BufReader::new(file)
         .lines()
         .map(|x| x.unwrap())
         .collect();
@@ -40,7 +40,6 @@ pub fn part_two() -> usize {
         let output: Vec<&str> = line[1].split(" ").collect();
         let line_str = format!("{}{}", line[0], line[1]);
         let line: Vec<&str> = line_str.split(" ").collect();
-        let mut found_numbers_count = 0;
         let mut found_numbers: HashMap<usize, HashSet<char>> = HashMap::from([
             (0, HashSet::new()),
             (1, HashSet::new()),
@@ -149,12 +148,6 @@ pub fn part_two() -> usize {
         }
         let final_output_number = concat(digits);
         count += final_output_number;
-
-        for (key, value) in found_numbers {
-            if value.len() != 0 {
-                found_numbers_count += 1;
-            }
-        }
     }
     count
 }
