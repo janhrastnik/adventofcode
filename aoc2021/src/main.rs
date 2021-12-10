@@ -1,6 +1,7 @@
 use std::io;
 
 mod day1;
+mod day10;
 mod day2;
 mod day3;
 mod day4;
@@ -11,7 +12,6 @@ mod day8;
 mod day9;
 
 fn main() {
-    println!("Hello, world!");
     let mut input = String::new();
     io::stdin()
         .read_line(&mut input)
@@ -35,6 +35,8 @@ fn main() {
         "8-2" => println!("{}", day8::part_two()),
         "9-1" => println!("{}", day9::part_one()),
         "9-2" => println!("{}", day9::part_two()),
+        "10-1" => println!("{}", day10::part_one()),
+        "10-2" => println!("{}", day10::part_two()),
         _ => println!("Wrong input!"),
     }
 }
