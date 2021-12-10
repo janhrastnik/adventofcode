@@ -116,30 +116,22 @@ pub fn part_two() -> usize {
                 // up
                 if candidate.0 != 0 {
                     let indices = (candidate.0 - 1, candidate.1);
-                    if !checked_elements.contains(&indices) {
-                        candidate_list.push(indices);
-                    }
+                    candidate_list.push(indices);
                 }
                 // down
                 if candidate.0 != row_count - 1 {
                     let indices = (candidate.0 + 1, candidate.1);
-                    if !checked_elements.contains(&indices) {
-                        candidate_list.push(indices);
-                    }
+                    candidate_list.push(indices);
                 }
                 // left
                 if candidate.1 != 0 {
                     let indices = (candidate.0, candidate.1 - 1);
-                    if !checked_elements.contains(&indices) {
-                        candidate_list.push(indices);
-                    }
+                    candidate_list.push(indices);
                 }
                 // right
                 if candidate.1 != col_count - 1 {
                     let indices = (candidate.0, candidate.1 + 1);
-                    if !checked_elements.contains(&indices) {
-                        candidate_list.push(indices);
-                    }
+                    candidate_list.push(indices);
                 }
             }
             checked_elements.push(candidate);

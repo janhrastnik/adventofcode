@@ -53,9 +53,7 @@ pub fn part_two() -> usize {
             (9, HashSet::new()),
         ]);
 
-        let mut six_candidates: Vec<HashSet<char>> = Vec::new();
-        let mut zero_candidates: Vec<HashSet<char>> = Vec::new();
-        let mut nine_candidates: Vec<HashSet<char>> = Vec::new();
+        let mut candidates: Vec<HashSet<char>> = Vec::new();
 
         for signal in line {
             if signal.len() == 2 {
@@ -68,9 +66,7 @@ pub fn part_two() -> usize {
                 *found_numbers.get_mut(&4).unwrap() = signal.chars().collect::<HashSet<char>>();
             }
             if signal.len() == 6 {
-                six_candidates.push(signal.chars().collect::<HashSet<char>>());
-                zero_candidates.push(signal.chars().collect::<HashSet<char>>());
-                nine_candidates.push(signal.chars().collect::<HashSet<char>>());
+                candidates.push(signal.chars().collect::<HashSet<char>>());
             }
             if signal.len() == 7 {
                 *found_numbers.get_mut(&8).unwrap() = signal.chars().collect::<HashSet<char>>();
@@ -84,23 +80,19 @@ pub fn part_two() -> usize {
         // determine bd
         let bd = &found_numbers[&4] - &found_numbers[&1];
 
-        // determine c
-        let mut c = 'a';
-        for candidate in six_candidates {
+        // determine c, b
+        let mut c = '0';
+        let mut b = '0';
+        for candidate in &mut candidates {
             let diff = &found_numbers[&1] - &candidate;
             if diff.len() == 1 {
-                *found_numbers.get_mut(&6).unwrap() = candidate;
+                *found_numbers.get_mut(&6).unwrap() = candidate.clone();
                 c = *diff.iter().next().unwrap();
             }
-        }
-
-        // determine b
-        let mut b = 'a';
-        for candidate in zero_candidates {
             let diff = &found_numbers[&8] - &candidate;
             let bd_diff = &bd - &diff;
             if bd_diff.len() == 1 {
-                *found_numbers.get_mut(&0).unwrap() = candidate;
+                *found_numbers.get_mut(&0).unwrap() = candidate.clone();
                 b = *bd_diff.iter().next().unwrap();
             }
         }
@@ -116,12 +108,12 @@ pub fn part_two() -> usize {
 
         // determine e
         let mut e = 'a';
-        for candidate in nine_candidates {
+        for candidate in &mut candidates {
             let diff = &found_numbers[&8] - &candidate;
             let diff_char = *diff.iter().next().unwrap();
             if diff_char != d && diff_char != c {
                 e = diff_char;
-                *found_numbers.get_mut(&9).unwrap() = candidate;
+                *found_numbers.get_mut(&9).unwrap() = candidate.clone();
             }
         }
 
