@@ -7,6 +7,7 @@ mod day12;
 mod day13;
 mod day14;
 mod day15;
+mod day16;
 mod day2;
 mod day3;
 mod day4;
@@ -52,6 +53,8 @@ fn main() {
         "14-2" => println!("{}", day14::part_two()),
         "15-1" => println!("{}", day15::part_one()),
         "15-2" => println!("{}", day15::part_two()),
+        "16-1" => println!("{}", day16::part_one()),
+        "16-2" => println!("{}", day16::part_two()),
         _ => println!("Wrong input!"),
     }
 }
