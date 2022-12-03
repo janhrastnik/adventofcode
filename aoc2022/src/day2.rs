@@ -6,7 +6,7 @@ pub fn solve() {
 }
 
 fn part_one() {
-    if let Ok(lines) = files::shared::read_lines("./../input/day2.txt") {
+    if let Ok(lines) = files::shared::read_lines("./input/day2.txt") {
         let mut score = 0;
         for line in lines {
             if let Ok(round) = line {
@@ -33,7 +33,7 @@ fn part_one() {
 "Anyway, the second column says how the round needs to end: X means you need to lose, Y means you need to end the round in a draw, and Z means you need to win. Good luck!"
 */
 fn part_two() {
-    if let Ok(lines) = files::shared::read_lines("./../input/day2.txt") {
+    if let Ok(lines) = files::shared::read_lines("./input/day2.txt") {
         let mut score = 0;
         for line in lines {
             if let Ok(round) = line {
