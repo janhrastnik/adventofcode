@@ -37,7 +37,6 @@ fn part_one() {
 
                             // move tail
                             tail_check(&mut head, &mut tail);
-                            println!("{:?}", tail);
                             visited.insert(tail.clone(), true);
                         }
                     }
@@ -49,7 +48,6 @@ fn part_one() {
 
                             // move tail
                             tail_check(&mut head, &mut tail);
-                            println!("{:?}", tail);
                             visited.insert(tail.clone(), true);
                         }
                     }
@@ -60,7 +58,6 @@ fn part_one() {
                             head.y += 1;
 
                             tail_check(&mut head, &mut tail);
-                            println!("{:?}", tail);
                             visited.insert(tail.clone(), true);
                         }
                     }
@@ -72,7 +69,6 @@ fn part_one() {
 
                             // move tail
                             tail_check(&mut head, &mut tail);
-                            println!("{:?}", tail);
                             visited.insert(tail.clone(), true);
                         }
                     }
@@ -88,9 +84,11 @@ fn part_one() {
 fn part_two() {
     if let Ok(lines) = files::shared::read_lines("./input/day9.txt") {
         let mut visited: HashMap<Point, bool> = HashMap::new();
-        let mut head = Point { x: 0, y: 0 };
-        let mut tail = Point { x: 0, y: 0 };
-        visited.insert(tail.clone(), true);
+        let mut rope: Vec<Point> = Vec::new();
+        for _i in 0..10 {
+            rope.push(Point { x: 0, y: 0 });
+        }
+        visited.insert(rope[9].clone(), true);
 
         for line in lines {
             if let Ok(command) = line {
@@ -100,47 +98,52 @@ fn part_two() {
                         let count = command_vec[1].parse::<isize>().unwrap();
                         for _i in 0..count {
                             // move head
-                            head.x += 1;
+                            rope[0].x += 1;
 
                             // move tail
-                            tail_check(&mut head, &mut tail);
-                            println!("{:?}", tail);
-                            visited.insert(tail.clone(), true);
+                            for i in 0..rope.len() - 1 {
+                                tail_check_two(&mut rope, i);
+                            }
+                            visited.insert(rope[9].clone(), true);
                         }
                     }
                     "L" => {
                         let count = command_vec[1].parse::<isize>().unwrap();
                         for _i in 0..count {
                             // move head
-                            head.x -= 1;
+                            rope[0].x -= 1;
 
                             // move tail
-                            tail_check(&mut head, &mut tail);
-                            println!("{:?}", tail);
-                            visited.insert(tail.clone(), true);
+                            for i in 0..rope.len() - 1 {
+                                tail_check_two(&mut rope, i);
+                            }
+                            visited.insert(rope[9].clone(), true);
                         }
                     }
                     "U" => {
                         let count = command_vec[1].parse::<isize>().unwrap();
                         for _i in 0..count {
                             // move head
-                            head.y += 1;
+                            rope[0].y += 1;
 
-                            tail_check(&mut head, &mut tail);
-                            println!("{:?}", tail);
-                            visited.insert(tail.clone(), true);
+                            // move tail
+                            for i in 0..rope.len() - 1 {
+                                tail_check_two(&mut rope, i);
+                            }
+                            visited.insert(rope[9].clone(), true);
                         }
                     }
                     "D" => {
                         let count = command_vec[1].parse::<isize>().unwrap();
                         for _i in 0..count {
                             // move head
-                            head.y -= 1;
+                            rope[0].y -= 1;
 
                             // move tail
-                            tail_check(&mut head, &mut tail);
-                            println!("{:?}", tail);
-                            visited.insert(tail.clone(), true);
+                            for i in 0..rope.len() - 1 {
+                                tail_check_two(&mut rope, i);
+                            }
+                            visited.insert(rope[9].clone(), true);
                         }
                     }
                     _ => unreachable!(),
@@ -163,5 +166,29 @@ fn tail_check(head: &mut Point, tail: &mut Point) {
         tail.x += (head.x - tail.x) / 2;
     } else if (head.y - tail.y).abs() == 2 {
         tail.y += (head.y - tail.y) / 2;
+    }
+}
+
+fn tail_check_two(rope: &mut Vec<Point>, index: usize) {
+    if ((rope[index].x - rope[index + 1].x).abs() == 2)
+        && ((rope[index].y - rope[index + 1].y).abs() == 1)
+    {
+        rope[index + 1].x += (rope[index].x - rope[index + 1].x) / 2;
+        rope[index + 1].y += rope[index].y - rope[index + 1].y;
+    } else if ((rope[index].x - rope[index + 1].x).abs() == 1)
+        && ((rope[index].y - rope[index + 1].y).abs() == 2)
+    {
+        rope[index + 1].x += rope[index].x - rope[index + 1].x;
+        rope[index + 1].y += (rope[index].y - rope[index + 1].y) / 2;
+    } else if (rope[index].x - rope[index + 1].x).abs() == 2 {
+        rope[index + 1].x += (rope[index].x - rope[index + 1].x) / 2;
+    } else if (rope[index].y - rope[index + 1].y).abs() == 2 {
+        rope[index + 1].y += (rope[index].y - rope[index + 1].y) / 2;
+    } else {
+        println!(
+            "{}, {}",
+            rope[index].x - rope[index + 1].x,
+            rope[index].y - rope[index + 1].y
+        );
     }
 }
