@@ -75,9 +75,8 @@ fn part_one() {
                     _ => unreachable!(),
                 }
             };
-            //println!("{:?}", visited.keys().len());
         }
-        println!("PART TWO: {:?}", visited.keys().len());
+        println!("PART ONE: {:?}", visited.keys().len());
     }
 }
 
@@ -149,7 +148,6 @@ fn part_two() {
                     _ => unreachable!(),
                 }
             };
-            //println!("{:?}", visited.keys().len());
         }
         println!("PART TWO: {:?}", visited.keys().len());
     }
@@ -180,15 +178,24 @@ fn tail_check_two(rope: &mut Vec<Point>, index: usize) {
     {
         rope[index + 1].x += rope[index].x - rope[index + 1].x;
         rope[index + 1].y += (rope[index].y - rope[index + 1].y) / 2;
+    } else if ((rope[index].x - rope[index + 1].x).abs() == 2)
+        && ((rope[index].y - rope[index + 1].y).abs() == 2)
+    {
+        rope[index + 1].x += (rope[index].x - rope[index + 1].x) / 2;
+        rope[index + 1].y += (rope[index].y - rope[index + 1].y) / 2;
     } else if (rope[index].x - rope[index + 1].x).abs() == 2 {
         rope[index + 1].x += (rope[index].x - rope[index + 1].x) / 2;
     } else if (rope[index].y - rope[index + 1].y).abs() == 2 {
         rope[index + 1].y += (rope[index].y - rope[index + 1].y) / 2;
-    } else {
-        println!(
-            "{}, {}",
+    } else if (rope[index].x - rope[index + 1].x).abs() > 1
+        || (rope[index].y - rope[index + 1].y).abs() > 1
+    {
+        unreachable!(
+            "x: {}, y: {}, index: {}, rope: {:?}",
             rope[index].x - rope[index + 1].x,
-            rope[index].y - rope[index + 1].y
+            rope[index].y - rope[index + 1].y,
+            index,
+            rope
         );
     }
 }
