@@ -10,7 +10,7 @@ pub fn solve() {
 
 fn part_one() {
     // File hosts must exist in current path before this produces output
-    if let Ok(lines) = read_lines("./../input/day1.txt") {
+    if let Ok(lines) = read_lines("./input/day1.txt") {
         // Consumes the iterator, returns an (Optional) String
         let mut counted_calories: Vec<usize> = Vec::new();
         let mut calorie_count = 0;
